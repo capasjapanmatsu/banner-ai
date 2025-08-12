@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase/client';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
 
 export async function POST(req: Request) {
   try {
@@ -24,25 +24,30 @@ export async function POST(req: Request) {
     }
 
     // userIdがある場合はSupabaseに保存
-    if (userId) {
-      const { data, error } = await supabase
-        .from('banner_events')
-        .insert([{ 
-          user_id: userId,
-          audience, 
-          event_type: event, 
-          spec_before: specBefore, 
-          spec_after: specAfter, 
-          deltas 
-        }])
-        .select()
-        .single();
+    if (userId && isSupabaseConfigured()) {
+      try {
+        const { data, error } = await supabase
+          .from('banner_events')
+          .insert([{ 
+            user_id: userId,
+            audience, 
+            event_type: event, 
+            spec_before: specBefore, 
+            spec_after: specAfter, 
+            deltas 
+          }])
+          .select()
+          .single();
 
-      if (error) {
-        console.error('Supabase error:', error);
-        // Supabaseエラーでもログを出力して継続
-      } else {
-        console.log('Feedback saved to Supabase:', data.id);
+        if (error) {
+          console.error('Supabase error:', error);
+          // Supabaseエラーでもログを出力して継続
+        } else {
+          console.log('Feedback saved to Supabase:', data.id);
+        }
+      } catch (supabaseError) {
+        console.error('Supabase connection error:', supabaseError);
+        // エラーでも処理を継続
       }
     }
 
