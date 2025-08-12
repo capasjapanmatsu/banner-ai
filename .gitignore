@@ -1,0 +1,11 @@
+﻿# Node/Next 共通
+node_modules/
+lp/node_modules/
+.next/
+dist/
+out/
+.cache/
+.env
+.env.*
+.DS_Store
+*.log
