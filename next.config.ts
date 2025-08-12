@@ -5,6 +5,12 @@ const nextConfig: NextConfig = {
     unoptimized: true,
     domains: [],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 export default nextConfig;

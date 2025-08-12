@@ -25,7 +25,7 @@ export default function Home() {
   const [hInput, setHInput] = useState(spec.meta.size.h);
   
   // 認証状態
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [emailInput, setEmailInput] = useState('');
   const [mounted, setMounted] = useState(false);

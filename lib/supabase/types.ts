@@ -6,10 +6,10 @@ export interface Profile {
 
 export interface UserStyleProfile {
   user_id: string;
-  font_prefs: Record<string, any>;
-  color_prefs: Record<string, any>;
-  layout_prefs: Record<string, any>;
-  segments: Record<string, any>;
+  font_prefs: Record<string, unknown>;
+  color_prefs: Record<string, unknown>;
+  layout_prefs: Record<string, unknown>;
+  segments: Record<string, unknown>;
   updated_at: string;
 }
 
@@ -18,9 +18,9 @@ export interface BannerEvent {
   user_id: string;
   audience?: string;
   event_type: 'proposal' | 'tweak' | 'approve';
-  spec_before?: any;
-  spec_after?: any;
-  deltas?: any;
+  spec_before?: Record<string, unknown>;
+  spec_after?: Record<string, unknown>;
+  deltas?: Record<string, unknown>;
   score?: number;
   created_at: string;
 }
