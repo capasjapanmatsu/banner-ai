@@ -47,15 +47,61 @@ export default function BannerRenderer({
   const ref = useRef<HTMLDivElement>(null);
   const { w, h } = spec.meta.size;
   const maxBytes = spec.export?.maxBytes ?? 900_000;
+  const [isShiftPressed, setIsShiftPressed] = useState(false);
 
   // 画像レイヤーのDOM参照を保持
   const imgRefs = useRef<Record<string, HTMLImageElement | null>>({});
   const setImgRef = (key: string) => (el: HTMLImageElement | null) => {
     imgRefs.current[key] = el;
+    console.log('Setting ref for:', key, el); // デバッグログ
   };
   const targetEl = selectedLayerId ? imgRefs.current[selectedLayerId] ?? null : null;
+  
+  // デバッグ用ログ
+  React.useEffect(() => {
+    console.log('Selected layer ID:', selectedLayerId);
+    console.log('Target element:', targetEl);
+  }, [selectedLayerId, targetEl]);
 
   const [dragOver, setDragOver] = useState(false);
+
+  // 全体的なクリック処理で選択解除
+  React.useEffect(() => {
+    const handleDocumentClick = (e: MouseEvent) => {
+      // バナー領域外をクリックした場合は選択解除
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        onSelectLayer?.(null);
+      }
+    };
+
+    document.addEventListener('click', handleDocumentClick);
+    
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, [onSelectLayer]);
+
+  // Shiftキーの状態を監視
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Shift') setIsShiftPressed(true);
+      // Deleteキーで選択された画像を削除
+      if (e.key === 'Delete' && selectedLayerId) {
+        deleteLayerById(selectedLayerId);
+      }
+    };
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === 'Shift') setIsShiftPressed(false);
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [selectedLayerId]);
 
   const imageLayers = useMemo(
     () => spec.layers
@@ -99,6 +145,14 @@ export default function BannerRenderer({
     const idx = next.layers.findIndex((l: any) => (l.id ?? null) === id);
     if (idx >= 0) next.layers[idx] = { ...(next.layers[idx] as any), ...patch };
     onChange(next);
+  };
+
+  // レイヤー削除
+  const deleteLayerById = (id: string) => {
+    const next = structuredClone(spec) as BannerSpec;
+    next.layers = next.layers.filter((l: any) => (l.id ?? null) !== id);
+    onChange(next);
+    onSelectLayer?.(null); // 選択解除
   };
 
   // 画像ファイル/URL追加
@@ -149,11 +203,22 @@ export default function BannerRenderer({
       <div
         ref={ref}
         className="relative overflow-hidden rounded-2xl shadow-xl bg-white select-none"
-        style={{ width: w, height: h }}
+        style={{ 
+          width: w, 
+          height: h, 
+          position: 'relative',
+          transform: 'translateZ(0)', // GPU加速を有効にして描画を最適化
+        }}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
-        onMouseDown={() => onSelectLayer?.(null)}
+        onClick={(e) => {
+          // 画像以外の領域をクリックした場合は選択解除
+          if (e.target === e.currentTarget) {
+            console.log('Banner background clicked - deselecting');
+            onSelectLayer?.(null);
+          }
+        }}
       >
         {/* ドロップヒント */}
         {dragOver && (
@@ -176,13 +241,35 @@ export default function BannerRenderer({
             ref={setImgRef(key)}
             src={l.src}
             alt=""
-            className={`absolute ${selectedLayerId === (l.id ?? key) ? "ring-2 ring-blue-500" : ""}`}
+            className={`absolute cursor-move select-none ${selectedLayerId === (l.id ?? key) ? "ring-2 ring-blue-500" : ""}`}
             crossOrigin="anonymous"
-            onMouseDown={(e) => { e.stopPropagation(); onSelectLayer?.((l.id ?? key) as string); }}
+            onMouseDown={(e) => { 
+              e.preventDefault();
+              e.stopPropagation(); 
+              onSelectLayer?.((l.id ?? key) as string); 
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('Image clicked - selecting:', (l.id ?? key));
+              onSelectLayer?.((l.id ?? key) as string); 
+            }}
+            draggable={false}
             style={{
-              left: l.x, top: l.y, width: l.w, height: l.h, opacity: l.opacity ?? 1,
+              left: l.x, 
+              top: l.y, 
+              width: l.w, 
+              height: l.h, 
+              opacity: l.opacity ?? 1,
               filter: cssFilter(l.effects?.filter),
               ...cssMask(l.effects?.mask),
+              transform: l.rotate ? `rotate(${l.rotate}deg)` : undefined,
+              transformOrigin: 'center center',
+              pointerEvents: 'auto',
+              userSelect: 'none',
+              objectFit: 'cover',
+              position: 'absolute',
+              zIndex: selectedLayerId === (l.id ?? key) ? 10 : 1,
             }}
           />
         ))}
@@ -197,29 +284,26 @@ export default function BannerRenderer({
                  0 -${st.stroke.width}px ${st.stroke.color},
                  0 ${st.stroke.width}px ${st.stroke.color}`
               : undefined;
+          
+          // テキスト色を濃くする（薄い色の場合は濃い色に変更）
+          let textColor = st.fill;
+          if (!textColor || textColor === '#ffffff' || textColor === 'white' || textColor === '#f0f0f0' || textColor === '#e0e0e0') {
+            textColor = '#1a1a1a'; // 濃いグレー
+          } else if (textColor === '#cccccc' || textColor === '#d0d0d0' || textColor === '#c0c0c0') {
+            textColor = '#2d2d2d'; // ダークグレー
+          }
+          
           return (
             <div
               key={`txt-${i}`} className="absolute"
               style={{
                 left: l.x, top: l.y, maxWidth: l.maxW,
-                fontFamily: st.font, fontWeight: st.weight, fontSize: st.size,
-                lineHeight: st.lineHeight ?? 1.1, color: st.fill, textShadow: shadow, whiteSpace: "pre-wrap",
+                fontFamily: st.font, fontWeight: st.weight || 600, fontSize: st.size,
+                lineHeight: st.lineHeight ?? 1.1, color: textColor, textShadow: shadow, whiteSpace: "pre-wrap",
               }}
             >{l.text}</div>
           );
         })}
-
-        {/* CTA */}
-        {spec.layers.filter((l: AnyLayer) => l.type === "cta").map((l: AnyLayer, i: number) => (
-          <div
-            key={`cta-${i}`} className="absolute flex items-center justify-center"
-            style={{
-              left: l.x, top: l.y, width: l.w, height: l.h,
-              background: l.style?.bg, color: l.style?.fill, borderRadius: l.style?.radius ?? 16,
-              fontFamily: l.style?.font, fontWeight: l.style?.weight, fontSize: l.style?.size,
-            }}
-          >{l.text}</div>
-        ))}
 
         {/* バッジ */}
         {spec.layers.filter((l: AnyLayer) => l.type === "badge").map((l: AnyLayer, i: number) => (
@@ -261,19 +345,16 @@ export default function BannerRenderer({
       </div>
 
       {/* Moveable（選択時のみ） */}
-      {targetEl && selectedLayerId && (
+      {selectedLayerId && targetEl && (
         <Moveable
           target={targetEl}
-          origin={false}
           draggable
           resizable
-          keepRatio
-          throttleDrag={1}
-          throttleResize={1}
+          rotatable
+          scalable
+          keepRatio={isShiftPressed}
           onDrag={(e) => {
             updateLayerById(selectedLayerId, { x: Math.round(e.left), y: Math.round(e.top) });
-            (e.target as HTMLElement).style.left = `${Math.round(e.left)}px`;
-            (e.target as HTMLElement).style.top = `${Math.round(e.top)}px`;
           }}
           onResize={(e) => {
             const left = Math.round(e.drag.left);
@@ -281,38 +362,63 @@ export default function BannerRenderer({
             const width = Math.round(e.width);
             const height = Math.round(e.height);
             updateLayerById(selectedLayerId, { x: left, y: top, w: width, h: height });
-            const t = e.target as HTMLElement;
-            t.style.left = `${left}px`;
-            t.style.top = `${top}px`;
-            t.style.width = `${width}px`;
-            t.style.height = `${height}px`;
           }}
-          renderDirections={["nw","n","ne","w","e","sw","s","se"]}
-          snappable
-          snapDirections={{ top:true, left:true, bottom:true, right:true, center:true, middle:true }}
-          elementGuidelines={[ref.current!]}
-          bounds={{ left: 0, top: 0, right: w, bottom: h }}
+          onRotate={(e) => {
+            updateLayerById(selectedLayerId, { rotate: Math.round(e.rotation) });
+          }}
+          onScale={(e) => {
+            const currentLayer = spec.layers.find((l: any) => (l.id ?? null) === selectedLayerId);
+            if (currentLayer && 'w' in currentLayer && 'h' in currentLayer) {
+              const newWidth = Math.round((currentLayer as any).w * e.scale[0]);
+              const newHeight = Math.round((currentLayer as any).h * e.scale[1]);
+              updateLayerById(selectedLayerId, { w: newWidth, h: newHeight });
+            }
+          }}
         />
       )}
 
       <div className="flex gap-2 mt-3">
         <button onClick={downloadPNG} className="px-3 py-1.5 rounded bg-black text-white">ダウンロード（PNG）</button>
         <button onClick={downloadWebP} className="px-3 py-1.5 rounded border">ダウンロード（WebP最適化）</button>
+        {selectedLayerId && (
+          <button 
+            onClick={() => deleteLayerById(selectedLayerId)} 
+            className="px-3 py-1.5 rounded bg-red-500 text-white hover:bg-red-600"
+          >
+            選択画像を削除
+          </button>
+        )}
         <span className="text-xs text-gray-500 self-center">目標: {(maxBytes/1024|0)} KB（はみ出しは自動トリミング）</span>
+      </div>
+      
+      {/* 操作ガイド */}
+      <div className="mt-2 text-xs text-gray-600 bg-gray-50 p-2 rounded">
+        <div className="font-medium mb-1">操作方法:</div>
+        <div>• 画像をクリック: 選択状態にする</div>
+        <div>• ドラッグ: 移動</div>
+        <div>• 角・辺をドラッグ: リサイズ</div>
+        <div>• 上部の円をドラッグ: 回転</div>
+        <div>• Shift + リサイズ: 縦横比を維持</div>
+        <div>• <span className="font-medium">Delete キー</span> または <span className="font-medium">削除ボタン</span>: 選択した画像を削除</div>
       </div>
     </div>
   );
 }
 
-// 画像の cover フィット（アスペクト維持で全面に配置し中央寄せ）
+// 画像の cover フィット（アスペクト維持で適切なサイズに配置し中央寄せ）
 async function fitCoverFromImage(src: string, W: number, H: number) {
   const img = await loadImage(src);
   const iw = img.naturalWidth, ih = img.naturalHeight;
-  const scale = Math.max(W / iw, H / ih);
+  
+  // バナー全体をカバーせず、適度なサイズに調整
+  const maxSize = Math.min(W, H) * 0.6; // バナーサイズの60%を最大に
+  const scale = Math.min(maxSize / iw, maxSize / ih);
+  
   const width = Math.round(iw * scale);
   const height = Math.round(ih * scale);
   const x = Math.round((W - width) / 2);
   const y = Math.round((H - height) / 2);
+  
   return { x, y, width, height };
 }
 function loadImage(src: string) {

@@ -25,6 +25,16 @@ export interface BannerEvent {
   created_at: string;
 }
 
+export interface UserLogo {
+  id: string;
+  user_id: string;
+  name: string;
+  url: string;
+  file_path: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -42,6 +52,11 @@ export interface Database {
         Row: BannerEvent;
         Insert: Omit<BannerEvent, 'id' | 'created_at'>;
         Update: Partial<Omit<BannerEvent, 'id' | 'user_id' | 'created_at'>>;
+      };
+      user_logos: {
+        Row: UserLogo;
+        Insert: Omit<UserLogo, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<UserLogo, 'id' | 'user_id' | 'created_at'>>;
       };
     };
   };

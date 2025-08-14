@@ -132,11 +132,11 @@ export default function ChatPanel({ onGenerate, currentSpec, audience }: Props) 
 
   return (
     <div className="border rounded-2xl p-3 space-y-3">
-      <div className="text-sm font-medium">チャット指示 / スクショやURLもOK</div>
+      <div className="text-sm font-bold text-gray-900">チャット指示 / スクショやURLもOK</div>
 
       <div ref={dropRef} className="border rounded p-2">
         <textarea
-          className="w-full border rounded p-2 text-sm min-h-32 resize-y"
+          className="w-full border rounded p-2 text-sm min-h-32 resize-y text-gray-900"
           rows={8}
           placeholder={`例：女性向け／青基調／このスクショみたいに太字で、CTAは右下／「本日23:59まで 最大20%OFF」\nURLも貼れます→ https://example.com/ref`}
           value={prompt}
@@ -144,11 +144,11 @@ export default function ChatPanel({ onGenerate, currentSpec, audience }: Props) 
           onPaste={onPaste}
         />
         <div className="flex items-center gap-2 mt-2">
-          <label className="px-3 py-1.5 rounded border cursor-pointer">
+          <label className="px-3 py-1.5 rounded border cursor-pointer text-gray-900 font-medium">
             スクショを追加（複数可）
             <input type="file" accept="image/*" multiple className="hidden" onChange={(e)=>handleFilePick(e.target.files)} />
           </label>
-          <span className="text-xs text-gray-500">ここにドラッグ&ドロップも可</span>
+          <span className="text-xs text-gray-800 font-medium">ここにドラッグ&ドロップも可</span>
         </div>
         {attachments.length > 0 && (
           <div className="flex gap-2 mt-2 flex-wrap">

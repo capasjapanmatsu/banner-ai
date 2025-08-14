@@ -132,7 +132,7 @@ export default function UploadPanel({
       {mode === "banner" && (
         <div className="space-y-6">
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-900">
               参考バナー画像
             </label>
             <input
@@ -166,7 +166,7 @@ export default function UploadPanel({
                   </span>
                 </div>
               ) : (
-                <span className="text-gray-500">参考バナーをアップロード</span>
+                <span className="text-gray-800 font-medium">参考バナーをアップロード</span>
               )}
             </button>
             
@@ -192,7 +192,7 @@ export default function UploadPanel({
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-900">
               商品写真
             </label>
             <input
@@ -220,7 +220,7 @@ export default function UploadPanel({
                   </span>
                 </div>
               ) : (
-                <span className="text-gray-500">商品写真をアップロード</span>
+                <span className="text-gray-800 font-medium">商品写真をアップロード</span>
               )}
             </button>
             
@@ -234,7 +234,7 @@ export default function UploadPanel({
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-900">
               ロゴ画像（オプション）
             </label>
             <input
@@ -262,7 +262,7 @@ export default function UploadPanel({
                   </span>
                 </div>
               ) : (
-                <span className="text-gray-500">ロゴをアップロード</span>
+                <span className="text-gray-800 font-medium">ロゴをアップロード</span>
               )}
             </button>
           </div>

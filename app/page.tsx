@@ -8,6 +8,7 @@ import UploadPanel from "@/components/UploadPanel";
 import ChatPanel from "@/components/ChatPanel";
 import BannerRenderer from "@/components/BannerRenderer";
 import EffectsPanel from "@/components/EffectsPanel";
+import LogoLibrary from "@/components/LogoLibrary";
 import { uid } from "@/lib/id";
 import { supabase } from "@/lib/supabase/client";
 import type { BackgroundEffect } from "@/types/banner";
@@ -146,6 +147,28 @@ export default function Home() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+  };
+
+  const handleLogoDrop = (logoUrl: string, logoName: string) => {
+    const newSpec = { ...spec };
+    const existingLogoLayer = newSpec.layers.find(layer => layer.type === "logo");
+    
+    if (existingLogoLayer && existingLogoLayer.type === "logo") {
+      existingLogoLayer.src = logoUrl;
+    } else {
+      newSpec.layers.push({
+        id: "saved-logo",
+        type: "logo",
+        src: logoUrl,
+        x: 20,
+        y: 20,
+        w: 80,
+        h: 40,
+        opacity: 1,
+      });
+    }
+    setSpec(newSpec);
+    setSelectedLayerId("saved-logo");
   };
 
   const handleFileUpload = (file: File, type: "reference" | "product" | "logo") => {
@@ -424,9 +447,17 @@ export default function Home() {
       <div className="flex h-[calc(100vh-80px)]">
         {/* 左ペイン */}
         <div className="w-[360px] bg-white border-r flex flex-col">
+          {/* ロゴライブラリ */}
+          <div className="p-4 border-b">
+            <LogoLibrary 
+              user={user} 
+              onLogoSelect={handleLogoDrop}
+            />
+          </div>
+
           {/* プリセット選択 */}
           <div className="p-4 border-b">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-900 mb-2">
               プリセット選択
             </label>
             <select
@@ -435,7 +466,7 @@ export default function Home() {
                 const preset = PRESET_CONFIGS.find(p => p.platform === e.target.value);
                 if (preset) handlePresetChange(preset);
               }}
-              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 font-medium"
             >
               {PRESET_CONFIGS.map((config) => (
                 <option key={config.platform} value={config.platform}>
@@ -446,7 +477,7 @@ export default function Home() {
             
             {/* カスタムサイズ */}
             <div className="mt-3">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-gray-900 mb-2">
                 カスタムサイズ
               </label>
               <div className="flex items-center gap-2">
