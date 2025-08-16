@@ -95,19 +95,34 @@ export default function ChatPanel({ onGenerate, currentSpec, audience }: Props) 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ brief }),
       });
-      const decision = (await res.json()) as AssistantDecision;
+      
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      
+      const data = await res.json();
+      
+      if (!data.ok) {
+        throw new Error(data.error || 'Assistant API returned error');
+      }
+      
+      const decision: AssistantDecision = data.decision;
 
       if (decision.status === "need_info") {
-        setQuestions(decision.questions);
+        setQuestions(decision.questions || []);
         setAnswers(prev => ({ ...brief, ...prev }));
       } else {
         setQuestions(null);
         setAnswers({});
-        onGenerate(decision.proposals[0]);
+        if (decision.proposals && decision.proposals.length > 0) {
+          onGenerate(decision.proposals[0]);
+        } else {
+          throw new Error('No proposals generated');
+        }
       }
     } catch (e) {
-      console.error(e);
-      alert("アシスタント処理に失敗しました");
+      console.error("Assistant API error:", e);
+      alert(`アシスタント処理に失敗しました: ${e instanceof Error ? e.message : 'Unknown error'}`);
     } finally {
       setLoading(false);
     }

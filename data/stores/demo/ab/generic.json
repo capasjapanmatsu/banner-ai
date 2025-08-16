@@ -1,0 +1,26 @@
+{
+  "product-hero": {
+    "plays": 16,
+    "wins": 8
+  },
+  "basic-sale": {
+    "plays": 10,
+    "wins": 5
+  },
+  "rank-award": {
+    "plays": 4,
+    "wins": 2
+  },
+  "limited-time": {
+    "plays": 0,
+    "wins": 0
+  },
+  "price-push": {
+    "plays": 0,
+    "wins": 0
+  },
+  "variant-grid": {
+    "plays": 0,
+    "wins": 0
+  }
+}

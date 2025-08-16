@@ -1,0 +1,11 @@
+{
+  "*": {
+    "titleScale": 1.0,
+    "priceScale": 1.0,
+    "badgeScale": 1.0,
+    "imageScale": 1.0,
+    "spacingScale": 1.0
+  },
+  "product-hero": { "titleScale": 1.05, "imageScale": 1.08 },
+  "catalog-grid": { "priceScale": 1.1, "spacingScale": 0.96 }
+}

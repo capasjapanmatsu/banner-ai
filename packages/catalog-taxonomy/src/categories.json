@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "primary": [
+    { "code": "fashion", "label_ja": "ファッション・アパレル" },
+    { "code": "car_parts", "label_ja": "車・バイク（パーツ・用品）" },
+    { "code": "home_electronics", "label_ja": "家電・AV機器" },
+    { "code": "interior", "label_ja": "インテリア・家具・雑貨" },
+    { "code": "food_beverage", "label_ja": "食品・飲料" },
+    { "code": "beauty_health", "label_ja": "美容・健康" },
+    { "code": "sports_outdoor", "label_ja": "スポーツ・アウトドア" },
+    { "code": "hobby_entertainment", "label_ja": "ホビー・エンタメ" }
+  ],
+  "allowMultiSelect": { "max": 3 }
+}

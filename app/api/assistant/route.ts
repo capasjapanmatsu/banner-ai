@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     // バリデーション
     if (!body.brief) {
       return NextResponse.json(
-        { error: "brief is required" },
+        { error: "brief is required", ok: false },
         { status: 400 }
       );
     }
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("Assistant API error:", error);
     return NextResponse.json(
-      { error: "Internal server error", ok: false },
+      { error: error instanceof Error ? error.message : "Internal server error", ok: false },
       { status: 500 }
     );
   }

@@ -1,0 +1,1152 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\CAPAS\\project1(bannerAI)\\banner-ai\\playwright.config.ts",
+    "rootDir": "C:/Users/CAPAS/project1(bannerAI)/banner-ai/test/e2e",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/CAPAS/project1(bannerAI)/banner-ai/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/CAPAS/project1(bannerAI)/banner-ai/test/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/CAPAS/project1(bannerAI)/banner-ai/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "C:/Users/CAPAS/project1(bannerAI)/banner-ai/test/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/CAPAS/project1(bannerAI)/banner-ai/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "C:/Users/CAPAS/project1(bannerAI)/banner-ai/test/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/CAPAS/project1(bannerAI)/banner-ai/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "Mobile Chrome",
+        "name": "Mobile Chrome",
+        "testDir": "C:/Users/CAPAS/project1(bannerAI)/banner-ai/test/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/CAPAS/project1(bannerAI)/banner-ai/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "Mobile Safari",
+        "name": "Mobile Safari",
+        "testDir": "C:/Users/CAPAS/project1(bannerAI)/banner-ai/test/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.54.2",
+    "workers": 10,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:3002",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "onboarding.spec.ts",
+      "file": "onboarding.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "オンボーディングフロー E2E テスト",
+          "file": "onboarding.spec.ts",
+          "line": 10,
+          "column": 6,
+          "specs": [
+            {
+              "title": "基本的なページアクセステスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-e30f616cd21024a0dce8",
+              "file": "onboarding.spec.ts",
+              "line": 25,
+              "column": 7
+            },
+            {
+              "title": "開発者ツールアクセステスト（本番環境では無効）",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-4b159a3bcec7b45e4b9b",
+              "file": "onboarding.spec.ts",
+              "line": 33,
+              "column": 7
+            },
+            {
+              "title": "プリセット検証ページの機能テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-33eed1eefc0235fada5f",
+              "file": "onboarding.spec.ts",
+              "line": 59,
+              "column": 7
+            },
+            {
+              "title": "バナー作成基本フローテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-dd4402383fbaa4b29893",
+              "file": "onboarding.spec.ts",
+              "line": 88,
+              "column": 7
+            },
+            {
+              "title": "レスポンシブデザインテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-35f31823003c6f816ff5",
+              "file": "onboarding.spec.ts",
+              "line": 120,
+              "column": 7
+            },
+            {
+              "title": "アクセシビリティ基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-0b5e064bc92072bddf8c",
+              "file": "onboarding.spec.ts",
+              "line": 143,
+              "column": 7
+            },
+            {
+              "title": "パフォーマンス基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-a03a34440b57233f008c",
+              "file": "onboarding.spec.ts",
+              "line": 177,
+              "column": 7
+            },
+            {
+              "title": "セキュリティ基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-53056745fcaae34ca0d2",
+              "file": "onboarding.spec.ts",
+              "line": 210,
+              "column": 7
+            },
+            {
+              "title": "基本的なページアクセステスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-ad3ecef2b899284c46ad",
+              "file": "onboarding.spec.ts",
+              "line": 25,
+              "column": 7
+            },
+            {
+              "title": "開発者ツールアクセステスト（本番環境では無効）",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-83518bc6b9a33bad417b",
+              "file": "onboarding.spec.ts",
+              "line": 33,
+              "column": 7
+            },
+            {
+              "title": "プリセット検証ページの機能テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-367b12951ffdb2fe5c4e",
+              "file": "onboarding.spec.ts",
+              "line": 59,
+              "column": 7
+            },
+            {
+              "title": "バナー作成基本フローテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-5b303c4a0e597f8c8987",
+              "file": "onboarding.spec.ts",
+              "line": 88,
+              "column": 7
+            },
+            {
+              "title": "レスポンシブデザインテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-5c72eff2599744671959",
+              "file": "onboarding.spec.ts",
+              "line": 120,
+              "column": 7
+            },
+            {
+              "title": "アクセシビリティ基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-a222004ddd4121f8212d",
+              "file": "onboarding.spec.ts",
+              "line": 143,
+              "column": 7
+            },
+            {
+              "title": "パフォーマンス基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-4cd37d18ec3c4cac1e68",
+              "file": "onboarding.spec.ts",
+              "line": 177,
+              "column": 7
+            },
+            {
+              "title": "セキュリティ基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-f24bd00097e3184f1fc5",
+              "file": "onboarding.spec.ts",
+              "line": 210,
+              "column": 7
+            },
+            {
+              "title": "基本的なページアクセステスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-58e0d1b05d4019d86000",
+              "file": "onboarding.spec.ts",
+              "line": 25,
+              "column": 7
+            },
+            {
+              "title": "開発者ツールアクセステスト（本番環境では無効）",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-0a3722348f1619cf1385",
+              "file": "onboarding.spec.ts",
+              "line": 33,
+              "column": 7
+            },
+            {
+              "title": "プリセット検証ページの機能テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-84d08ddde75b1da734b5",
+              "file": "onboarding.spec.ts",
+              "line": 59,
+              "column": 7
+            },
+            {
+              "title": "バナー作成基本フローテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-02ac0873d65a01ca5e6e",
+              "file": "onboarding.spec.ts",
+              "line": 88,
+              "column": 7
+            },
+            {
+              "title": "レスポンシブデザインテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-19798faaccbc112502b6",
+              "file": "onboarding.spec.ts",
+              "line": 120,
+              "column": 7
+            },
+            {
+              "title": "アクセシビリティ基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-799351279c8955ca4380",
+              "file": "onboarding.spec.ts",
+              "line": 143,
+              "column": 7
+            },
+            {
+              "title": "パフォーマンス基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-d799bbf3027ac7c0be96",
+              "file": "onboarding.spec.ts",
+              "line": 177,
+              "column": 7
+            },
+            {
+              "title": "セキュリティ基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-39c60aa928f52d197e74",
+              "file": "onboarding.spec.ts",
+              "line": 210,
+              "column": 7
+            },
+            {
+              "title": "基本的なページアクセステスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-06fea10696a9135e76f4",
+              "file": "onboarding.spec.ts",
+              "line": 25,
+              "column": 7
+            },
+            {
+              "title": "開発者ツールアクセステスト（本番環境では無効）",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-3d99bd596f592aaa5fa1",
+              "file": "onboarding.spec.ts",
+              "line": 33,
+              "column": 7
+            },
+            {
+              "title": "プリセット検証ページの機能テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-2cb1a4879e524e28736a",
+              "file": "onboarding.spec.ts",
+              "line": 59,
+              "column": 7
+            },
+            {
+              "title": "バナー作成基本フローテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-819f51046cea30fe184c",
+              "file": "onboarding.spec.ts",
+              "line": 88,
+              "column": 7
+            },
+            {
+              "title": "レスポンシブデザインテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-08d823d5cca0c8697a04",
+              "file": "onboarding.spec.ts",
+              "line": 120,
+              "column": 7
+            },
+            {
+              "title": "アクセシビリティ基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-84bc871b601c80e67932",
+              "file": "onboarding.spec.ts",
+              "line": 143,
+              "column": 7
+            },
+            {
+              "title": "パフォーマンス基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-a557f3dea9eb150a18c8",
+              "file": "onboarding.spec.ts",
+              "line": 177,
+              "column": 7
+            },
+            {
+              "title": "セキュリティ基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-dad10cbd5daca3835ed5",
+              "file": "onboarding.spec.ts",
+              "line": 210,
+              "column": 7
+            },
+            {
+              "title": "基本的なページアクセステスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-834978dc61e30cc3082c",
+              "file": "onboarding.spec.ts",
+              "line": 25,
+              "column": 7
+            },
+            {
+              "title": "開発者ツールアクセステスト（本番環境では無効）",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-b0b1c7cf64f0e3e52c10",
+              "file": "onboarding.spec.ts",
+              "line": 33,
+              "column": 7
+            },
+            {
+              "title": "プリセット検証ページの機能テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-75c3f68104c05a1fb6fd",
+              "file": "onboarding.spec.ts",
+              "line": 59,
+              "column": 7
+            },
+            {
+              "title": "バナー作成基本フローテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-1b9549efc45956187c87",
+              "file": "onboarding.spec.ts",
+              "line": 88,
+              "column": 7
+            },
+            {
+              "title": "レスポンシブデザインテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-57e7dc3af2fc2bf216d1",
+              "file": "onboarding.spec.ts",
+              "line": 120,
+              "column": 7
+            },
+            {
+              "title": "アクセシビリティ基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-8f10a01914cb1d6571a8",
+              "file": "onboarding.spec.ts",
+              "line": 143,
+              "column": 7
+            },
+            {
+              "title": "パフォーマンス基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-e6a8f529e1853a53d4c1",
+              "file": "onboarding.spec.ts",
+              "line": 177,
+              "column": 7
+            },
+            {
+              "title": "セキュリティ基本テスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-e72cfeaa97aaaf9985fe",
+              "file": "onboarding.spec.ts",
+              "line": 210,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "実ユーザーシナリオテスト",
+          "file": "onboarding.spec.ts",
+          "line": 244,
+          "column": 6,
+          "specs": [
+            {
+              "title": "新規ユーザーのバナー作成完全フロー",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-32fedc9ae6019e71fc30",
+              "file": "onboarding.spec.ts",
+              "line": 245,
+              "column": 7
+            },
+            {
+              "title": "エラーハンドリングとユーザビリティテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-713a81fec0eeb118c29b",
+              "file": "onboarding.spec.ts",
+              "line": 292,
+              "column": 7
+            },
+            {
+              "title": "新規ユーザーのバナー作成完全フロー",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-b7a6cb2157a8ca536132",
+              "file": "onboarding.spec.ts",
+              "line": 245,
+              "column": 7
+            },
+            {
+              "title": "エラーハンドリングとユーザビリティテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "firefox",
+                  "projectName": "firefox",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-ab791850cb8fe1004638",
+              "file": "onboarding.spec.ts",
+              "line": 292,
+              "column": 7
+            },
+            {
+              "title": "新規ユーザーのバナー作成完全フロー",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-c58c376952c36cb0b0d4",
+              "file": "onboarding.spec.ts",
+              "line": 245,
+              "column": 7
+            },
+            {
+              "title": "エラーハンドリングとユーザビリティテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-1eba5edb6661fd8df669",
+              "file": "onboarding.spec.ts",
+              "line": 292,
+              "column": 7
+            },
+            {
+              "title": "新規ユーザーのバナー作成完全フロー",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-b6b0a81ae3b512a47fc2",
+              "file": "onboarding.spec.ts",
+              "line": 245,
+              "column": 7
+            },
+            {
+              "title": "エラーハンドリングとユーザビリティテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Chrome",
+                  "projectName": "Mobile Chrome",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-8fcabb8327e3f99646bb",
+              "file": "onboarding.spec.ts",
+              "line": 292,
+              "column": 7
+            },
+            {
+              "title": "新規ユーザーのバナー作成完全フロー",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-28eabd0271cc56176c73",
+              "file": "onboarding.spec.ts",
+              "line": 245,
+              "column": 7
+            },
+            {
+              "title": "エラーハンドリングとユーザビリティテスト",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "Mobile Safari",
+                  "projectName": "Mobile Safari",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-b0e95112f17cc9905331",
+              "file": "onboarding.spec.ts",
+              "line": 292,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-08-14T21:43:05.063Z",
+    "duration": 81.125,
+    "expected": 0,
+    "skipped": 50,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

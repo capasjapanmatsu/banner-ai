@@ -1,0 +1,13 @@
+{
+  "keep": ["UVカット", "吸水速乾", "公式限定", "今だけ特典"],
+  "replace": {
+    "ｾｰﾙ": "セール",
+    "Ｔシャツ": "Tシャツ",
+    "ゆうﾊﾟｯｸ": "ゆうパック"
+  },
+  "drop": ["訳あり", "激安"],
+  "normalize": {
+    "fullwidthPercentToAscii": true,
+    "collapseSpaces": true
+  }
+}

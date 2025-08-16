@@ -1,0 +1,36 @@
+{
+  "name": "@banner-ai/catalog-taxonomy",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "共有カテゴリ定義 - LP・APP間で統一されたカテゴリ管理",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rimraf dist"
+  },
+  "keywords": [
+    "catalog",
+    "taxonomy",
+    "categories",
+    "banner-ai"
+  ],
+  "author": "Banner AI Team",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "rimraf": "^5.0.0"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ]
+}

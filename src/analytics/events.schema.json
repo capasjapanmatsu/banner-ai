@@ -1,0 +1,244 @@
+{
+  "version": "1.0.0",
+  "events": {
+    "onboarding_category_selected": {
+      "description": "ユーザーがオンボーディング時にカテゴリを選択した",
+      "required_fields": ["pc", "source"],
+      "optional_fields": ["sc", "consent", "user_id", "session_id", "timestamp"],
+      "properties": {
+        "pc": {
+          "type": "string",
+          "description": "主要カテゴリコード",
+          "enum": ["fashion", "car_parts", "home_electronics", "interior", "food_beverage", "beauty_health", "sports_outdoor", "hobby_entertainment"]
+        },
+        "sc": {
+          "type": "array",
+          "description": "追加カテゴリコード配列",
+          "items": {"type": "string"},
+          "maxItems": 3
+        },
+        "consent": {
+          "type": "boolean",
+          "description": "学習利用への同意"
+        },
+        "source": {
+          "type": "string",
+          "description": "イベント発生元",
+          "enum": ["LP", "APP"]
+        },
+        "user_id": {
+          "type": "string",
+          "description": "ユーザーID（ログイン後のみ）"
+        },
+        "session_id": {
+          "type": "string",
+          "description": "セッションID"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "イベント発生時刻（ISO 8601）"
+        }
+      }
+    },
+    "signup_completed": {
+      "description": "ユーザー登録が完了した",
+      "required_fields": ["user_id", "pc"],
+      "optional_fields": ["sc", "consent", "email", "shop_name", "session_id", "timestamp"],
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "description": "登録されたユーザーID"
+        },
+        "pc": {
+          "type": "string",
+          "description": "主要カテゴリコード"
+        },
+        "sc": {
+          "type": "array",
+          "description": "追加カテゴリコード配列"
+        },
+        "consent": {
+          "type": "boolean",
+          "description": "学習利用への同意"
+        },
+        "email": {
+          "type": "string",
+          "description": "登録メールアドレス（ハッシュ化推奨）"
+        },
+        "shop_name": {
+          "type": "string",
+          "description": "ショップ名"
+        }
+      }
+    },
+    "generation_created": {
+      "description": "AI生成処理が開始された",
+      "required_fields": ["user_id", "pc", "type"],
+      "optional_fields": ["generation_id", "preset_id", "image_count", "session_id", "timestamp"],
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "description": "ユーザーID"
+        },
+        "pc": {
+          "type": "string",
+          "description": "ユーザーの主要カテゴリ"
+        },
+        "type": {
+          "type": "string",
+          "description": "生成タイプ",
+          "enum": ["banner", "retouch", "tryon", "background_removal", "image_enhancement"]
+        },
+        "generation_id": {
+          "type": "string",
+          "description": "生成処理の一意ID"
+        },
+        "preset_id": {
+          "type": "string",
+          "description": "使用されたプリセットID"
+        },
+        "image_count": {
+          "type": "number",
+          "description": "処理対象画像数"
+        }
+      }
+    },
+    "asset_adopted": {
+      "description": "生成されたアセットがユーザーに採用された",
+      "required_fields": ["user_id", "pc", "asset_id", "asset_type"],
+      "optional_fields": ["generation_id", "rating", "reason_tags", "session_id", "timestamp"],
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "description": "ユーザーID"
+        },
+        "pc": {
+          "type": "string",
+          "description": "ユーザーの主要カテゴリ"
+        },
+        "asset_id": {
+          "type": "string",
+          "description": "アセットの一意ID"
+        },
+        "asset_type": {
+          "type": "string",
+          "description": "アセットタイプ",
+          "enum": ["banner", "preset", "image", "logo", "text"]
+        },
+        "generation_id": {
+          "type": "string",
+          "description": "生成処理ID"
+        },
+        "rating": {
+          "type": "number",
+          "description": "ユーザー評価（1-5）"
+        },
+        "reason_tags": {
+          "type": "array",
+          "description": "採用理由タグ",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "asset_rejected": {
+      "description": "生成されたアセットがユーザーに却下された",
+      "required_fields": ["user_id", "pc", "asset_id", "asset_type"],
+      "optional_fields": ["generation_id", "reason_tags", "session_id", "timestamp"],
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "description": "ユーザーID"
+        },
+        "pc": {
+          "type": "string",
+          "description": "ユーザーの主要カテゴリ"
+        },
+        "asset_id": {
+          "type": "string",
+          "description": "アセットの一意ID"
+        },
+        "asset_type": {
+          "type": "string",
+          "description": "アセットタイプ"
+        },
+        "generation_id": {
+          "type": "string",
+          "description": "生成処理ID"
+        },
+        "reason_tags": {
+          "type": "array",
+          "description": "却下理由タグ",
+          "items": {"type": "string"},
+          "examples": [["quality_low", "not_suitable", "wrong_style"]]
+        }
+      }
+    },
+    "consent_toggled": {
+      "description": "学習利用同意の設定が変更された",
+      "required_fields": ["user_id", "prev", "next"],
+      "optional_fields": ["at", "source", "session_id", "timestamp"],
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "description": "ユーザーID"
+        },
+        "prev": {
+          "type": "boolean",
+          "description": "変更前の同意状態"
+        },
+        "next": {
+          "type": "boolean",
+          "description": "変更後の同意状態"
+        },
+        "at": {
+          "type": "string",
+          "description": "変更が行われた画面・機能",
+          "enum": ["signup", "settings", "onboarding"]
+        },
+        "source": {
+          "type": "string",
+          "description": "変更元",
+          "enum": ["LP", "APP"]
+        }
+      }
+    },
+    "session_started": {
+      "description": "ユーザーセッションが開始された",
+      "required_fields": ["session_id", "source"],
+      "optional_fields": ["user_id", "pc", "referrer", "timestamp"],
+      "properties": {
+        "session_id": {
+          "type": "string",
+          "description": "セッションID"
+        },
+        "source": {
+          "type": "string",
+          "description": "セッション開始元",
+          "enum": ["LP", "APP"]
+        },
+        "user_id": {
+          "type": "string",
+          "description": "ユーザーID（ログイン時のみ）"
+        },
+        "pc": {
+          "type": "string",
+          "description": "ユーザーの主要カテゴリ（ログイン時のみ）"
+        },
+        "referrer": {
+          "type": "string",
+          "description": "リファラーURL"
+        }
+      }
+    }
+  },
+  "validation_rules": {
+    "all_events_must_include_timestamp": true,
+    "all_events_must_include_session_id": true,
+    "user_events_must_include_pc": "ユーザー特定可能なイベントにはpcが必須",
+    "max_payload_size_kb": 10,
+    "rate_limit_per_session": {
+      "max_events_per_minute": 100,
+      "max_events_per_hour": 1000
+    }
+  }
+}

@@ -12,6 +12,12 @@ CREATE TABLE IF NOT EXISTS user_logos (
 -- RLS (Row Level Security) を有効化
 ALTER TABLE user_logos ENABLE ROW LEVEL SECURITY;
 
+-- 既存のポリシーを削除（重複回避）
+DROP POLICY IF EXISTS "Users can view own logos" ON user_logos;
+DROP POLICY IF EXISTS "Users can insert own logos" ON user_logos;
+DROP POLICY IF EXISTS "Users can update own logos" ON user_logos;
+DROP POLICY IF EXISTS "Users can delete own logos" ON user_logos;
+
 -- ユーザーは自分のロゴのみアクセス可能
 CREATE POLICY "Users can view own logos" ON user_logos
   FOR SELECT USING (auth.uid() = user_id);
@@ -29,15 +35,31 @@ CREATE POLICY "Users can delete own logos" ON user_logos
 CREATE INDEX IF NOT EXISTS user_logos_user_id_idx ON user_logos(user_id);
 CREATE INDEX IF NOT EXISTS user_logos_created_at_idx ON user_logos(created_at DESC);
 
--- ストレージバケットを作成（Supabase管理画面で実行するか、以下のSQLで作成）
--- INSERT INTO storage.buckets (id, name, public) VALUES ('user-logos', 'user-logos', true);
+-- ストレージバケット作成
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('user-logos', 'user-logos', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- 既存のストレージポリシーを削除（重複回避）
+DROP POLICY IF EXISTS "Users can upload own logos" ON storage.objects;
+DROP POLICY IF EXISTS "Users can view own logos" ON storage.objects;
+DROP POLICY IF EXISTS "Users can delete own logos" ON storage.objects;
 
 -- ストレージポリシーを設定
--- CREATE POLICY "Users can upload own logos" ON storage.objects
---   FOR INSERT WITH CHECK (bucket_id = 'user-logos' AND auth.uid()::text = (storage.foldername(name))[1]);
+CREATE POLICY "Users can upload own logos" ON storage.objects
+  FOR INSERT WITH CHECK (
+    bucket_id = 'user-logos' AND 
+    auth.uid()::text = (storage.foldername(name))[1]
+  );
 
--- CREATE POLICY "Users can view own logos" ON storage.objects
---   FOR SELECT USING (bucket_id = 'user-logos' AND auth.uid()::text = (storage.foldername(name))[1]);
+CREATE POLICY "Users can view own logos" ON storage.objects
+  FOR SELECT USING (
+    bucket_id = 'user-logos' AND 
+    auth.uid()::text = (storage.foldername(name))[1]
+  );
 
--- CREATE POLICY "Users can delete own logos" ON storage.objects
---   FOR DELETE USING (bucket_id = 'user-logos' AND auth.uid()::text = (storage.foldername(name))[1]);
+CREATE POLICY "Users can delete own logos" ON storage.objects
+  FOR DELETE USING (
+    bucket_id = 'user-logos' AND 
+    auth.uid()::text = (storage.foldername(name))[1]
+  );

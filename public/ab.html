@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>テンプレ A/B テスト</title>
+    <style>
+      body {
+        font-family: system-ui, "Noto Sans JP", sans-serif;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 12px;
+      }
+      img {
+        max-width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      }
+      label,
+      input,
+      select {
+        display: block;
+        width: 100%;
+      }
+      button {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>テンプレ A/B テスト</h1>
+    <section class="card">
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px">
+        <label
+          >市場<select id="market">
+            <option value="generic">汎用</option>
+            <option value="r10">楽天市場</option>
+            <option value="yss">Yahoo!</option>
+          </select></label
+        >
+        <label
+          >プリセット<select id="preset">
+            <option value="r10_product">r10_product</option>
+            <option value="yss_banner">yss_banner</option>
+            <option value="square1080">square1080</option>
+          </select></label
+        >
+        <label
+          >候補数<select id="n">
+            <option>2</option>
+            <option selected>3</option>
+            <option>4</option>
+          </select></label
+        >
+      </div>
+      <div
+        style="
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+          margin-top: 12px;
+        "
+      >
+        <label>タイトル<input id="title" value="夏の大感謝祭" /></label>
+        <label>価格<input id="price" placeholder="¥3,980" /></label>
+        <label>割引<input id="discount" placeholder="20%OFF" /></label>
+        <label
+          >バッジ<input id="badge" placeholder="楽天ランキング1位"
+        /></label>
+      </div>
+      <button id="btn">候補を生成</button>
+    </section>
+    <section id="result" style="margin-top: 16px"></section>
+    <script>
+      let sessionId = null;
+      document.getElementById("btn").onclick = async () => {
+        const payload = {
+          title: document.getElementById("title").value,
+          price: document.getElementById("price").value || undefined,
+          discount: document.getElementById("discount").value || undefined,
+          badge: document.getElementById("badge").value || undefined,
+        };
+        const body = {
+          tenantId: "demo",
+          market: document.getElementById("market").value,
+          n: Number(document.getElementById("n").value),
+          preset: document.getElementById("preset").value,
+          profile: "./data/profiles/sample.json",
+          payload,
+        };
+        const res = await fetch("/api/ab/suggest", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        const j = await res.json();
+        if (!j.ok) return alert(j.error);
+        sessionId = j.sessionId;
+        const box = document.getElementById("result");
+        box.innerHTML =
+          '<div class="grid">' +
+          j.candidates
+            .map(
+              (c) => `
+    <div class="card">
+      <h3>${c.template}</h3>
+      <img src="${c.url}?t=${Date.now()}">
+      <button onclick="selectWinner('${c.id}')">これを採用</button>
+    </div>`
+            )
+            .join("") +
+          "</div>";
+      };
+      async function selectWinner(id) {
+        if (!sessionId) return;
+        const res = await fetch("/api/ab/select", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            tenantId: "demo",
+            market: document.getElementById("market").value,
+            sessionId,
+            choiceId: id,
+          }),
+        });
+        const j = await res.json();
+        if (!j.ok) return alert(j.error);
+        alert(`採用を記録: ${j.winner}`);
+      }
+    </script>
+  </body>
+</html>

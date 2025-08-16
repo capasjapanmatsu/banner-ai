@@ -1,0 +1,39 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2024-12-19",
+  "primary": [
+    {
+      "code": "fashion",
+      "label_ja": "ファッション",
+      "label_en": "Fashion",
+      "description": "衣類・アクセサリー・バッグなど"
+    },
+    {
+      "code": "home_electronics",
+      "label_ja": "家電",
+      "label_en": "Home Electronics", 
+      "description": "家電製品・電子機器"
+    },
+    {
+      "code": "food_beverage",
+      "label_ja": "食品・飲料",
+      "label_en": "Food & Beverage",
+      "description": "食品・飲み物・調味料など"
+    },
+    {
+      "code": "beauty_health",
+      "label_ja": "美容・健康",
+      "label_en": "Beauty & Health",
+      "description": "化粧品・サプリメント・健康食品"
+    }
+  ],
+  "allowMultiSelect": {
+    "max": 3,
+    "description": "追加カテゴリの最大選択数"
+  },
+  "metadata": {
+    "isDefault": true,
+    "source": "built-in fallback",
+    "note": "This is the minimal fallback catalog used when CDN is unavailable"
+  }
+}

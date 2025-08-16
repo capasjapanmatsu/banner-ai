@@ -1,6 +1,11 @@
+import type { PrimaryCategoryCode } from '@banner-ai/catalog-taxonomy';
+
 export interface Profile {
   user_id: string;
   shop_name?: string;
+  primary_category?: PrimaryCategoryCode;
+  secondary_categories?: PrimaryCategoryCode[];
+  model_training_consent?: boolean;
   created_at: string;
 }
 
@@ -35,6 +40,14 @@ export interface UserLogo {
   updated_at: string;
 }
 
+export interface ConsentHistory {
+  id: string;
+  user_id: string;
+  prev_consent: boolean;
+  next_consent: boolean;
+  changed_at: string;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -57,6 +70,11 @@ export interface Database {
         Row: UserLogo;
         Insert: Omit<UserLogo, 'id' | 'created_at' | 'updated_at'>;
         Update: Partial<Omit<UserLogo, 'id' | 'user_id' | 'created_at'>>;
+      };
+      consent_history: {
+        Row: ConsentHistory;
+        Insert: Omit<ConsentHistory, 'id' | 'changed_at'>;
+        Update: never; // 履歴は変更不可
       };
     };
   };

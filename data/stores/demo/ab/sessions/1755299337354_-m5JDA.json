@@ -1,0 +1,19 @@
+{
+  "picks": [
+    {
+      "id": "XP_r6y7W",
+      "template": "product-hero",
+      "path": "C:\\Users\\CAPAS\\project1(bannerAI)\\banner-ai\\out\\ab_1755299337354_-m5JDA_product-hero.png"
+    },
+    {
+      "id": "gyNW2So0",
+      "template": "basic-sale",
+      "path": "C:\\Users\\CAPAS\\project1(bannerAI)\\banner-ai\\out\\ab_1755299337354_-m5JDA_basic-sale.png"
+    }
+  ],
+  "payload": {
+    "title": "夏の大感謝祭"
+  },
+  "preset": "r10_product",
+  "market": "r10"
+}

@@ -1,0 +1,42 @@
+{
+  "token_expired": {
+    "title": "有効期限が切れました",
+    "message": "有効期限が切れました。もう一度お手続きください。",
+    "action": "LPに戻る"
+  },
+  "invalid_category": {
+    "title": "カテゴリエラー",
+    "message": "選択されたカテゴリが無効です。もう一度選択してください。",
+    "action": "カテゴリを選択し直す"
+  },
+  "invalid_token": {
+    "title": "無効なトークン",
+    "message": "登録情報が見つかりません。最初からやり直してください。",
+    "action": "LPに戻る"
+  },
+  "token_already_used": {
+    "title": "使用済みトークン",
+    "message": "この登録リンクは既に使用済みです。新しいリンクを取得してください。",
+    "action": "LPに戻る"
+  },
+  "network_error": {
+    "title": "接続エラー",
+    "message": "サーバーとの接続に問題があります。しばらく待ってから再度お試しください。",
+    "action": "再試行"
+  },
+  "unknown_error": {
+    "title": "エラーが発生しました",
+    "message": "予期しないエラーが発生しました。しばらく待ってから再度お試しください。",
+    "action": "再試行"
+  },
+  "consent_update_failed": {
+    "title": "設定の更新に失敗しました",
+    "message": "学習利用設定の更新に失敗しました。再度お試しください。",
+    "action": "再試行"
+  },
+  "profile_load_failed": {
+    "title": "プロフィール読み込みエラー",
+    "message": "プロフィール情報の読み込みに失敗しました。",
+    "action": "再読み込み"
+  }
+}

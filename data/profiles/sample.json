@@ -1,0 +1,28 @@
+{
+  "brandName": "サンプル店舗",
+  "colors": {
+    "primary": "#D92C2C",
+    "secondary": "#FFE8E8",
+    "accent": "#FFD93D",
+    "text": "#111111"
+  },
+  "font": {
+    "family": "Noto Sans JP",
+    "path": ""
+  },
+  "tone": "元気",
+  "layoutDensity": "normal",
+  "safeMargin": 48,
+  "fontScale": 1.1,
+  "saturation": 0.9,
+  "rules": {
+    "showPrice": true,
+    "showDiscount": true,
+    "showBadge": true
+  },
+  "templateInit": {
+    "product-hero": 8,
+    "basic-sale": 5,
+    "rank-award": 2
+  }
+}

@@ -39,7 +39,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="https://app.shopdesignerai.com" 
+              href="/signup/intake" 
               className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors"
             >
               無料で始める
@@ -116,7 +116,7 @@ export default function HomePage() {
             無料トライアルで、AIの力を体験してください
           </p>
           <a 
-            href="https://app.shopdesignerai.com" 
+            href="/signup/intake" 
             className="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
           >
             無料で始める

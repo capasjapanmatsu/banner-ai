@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>バナーAI ミニランチャー</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, "Noto Sans JP", sans-serif;
+        padding: 24px;
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      fieldset {
+        margin-bottom: 16px;
+        border: 1px solid #ddd;
+        padding: 12px;
+        border-radius: 12px;
+      }
+      label {
+        display: block;
+        font-size: 14px;
+        margin: 6px 0;
+      }
+      input,
+      select {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        width: 100%;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      button {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      #preview {
+        margin-top: 16px;
+      }
+      img {
+        max-width: 100%;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>バナーAI ミニランチャー</h1>
+    <form id="f" enctype="multipart/form-data">
+      <fieldset>
+        <legend>出力</legend>
+        <div class="row">
+          <label
+            >テンプレ
+            <select name="template">
+              <option value="product-hero">product-hero</option>
+              <option value="basic-sale">basic-sale</option>
+              <option value="rank-award">rank-award</option>
+              <option value="limited-time">limited-time</option>
+              <option value="price-push">price-push</option>
+              <option value="variant-grid">variant-grid</option>
+            </select>
+          </label>
+          <label
+            >プリセット
+            <select name="preset">
+              <option value="r10_product">r10_product</option>
+              <option value="yss_banner">yss_banner</option>
+              <option value="square1080">square1080</option>
+            </select>
+          </label>
+        </div>
+        <div class="row">
+          <label
+            >背景色
+            <select name="paletteMode">
+              <option value="">（変更しない）</option>
+              <option value="brand">ブランド調和</option>
+              <option value="auto-analogous">自動：類似色</option>
+              <option value="auto-complementary">自動：補色</option>
+              <option value="auto-soft">自動：ソフト</option>
+            </select>
+          </label>
+          <label style="visibility: hidden"
+            >スペーサー<select disabled></select
+          ></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>文言</legend>
+        <label
+          >市場
+          <select name="market">
+            <option value="generic">汎用</option>
+            <option value="r10">楽天市場</option>
+            <option value="yss">Yahoo!ショッピング</option>
+          </select>
+        </label>
+        <div class="row">
+          <label>タイトル<input name="title" value="夏の大感謝祭" /></label>
+          <label>根拠（任意：No.1等の出典）<input name="evidence" /></label>
+        </div>
+        <div class="row">
+          <label>価格<input name="price" placeholder="¥3,980" /></label>
+          <label>割引<input name="discount" placeholder="20%OFF" /></label>
+        </div>
+        <div class="row">
+          <label
+            >バッジ<input name="badge" placeholder="楽天ランキング1位"
+          /></label>
+          <label>期間<input name="period" placeholder="8/18-8/20" /></label>
+        </div>
+        <label
+          >バリエーション（カンマ区切り）<input
+            name="variants"
+            placeholder="S,M,L,XL"
+        /></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>商品画像</legend>
+        <div class="row">
+          <label
+            >画像アップロード<input type="file" name="image" accept="image/*"
+          /></label>
+          <label
+            >フィット<select name="fit">
+              <option>contain</option>
+              <option>cover</option>
+            </select></label
+          >
+        </div>
+        <p>
+          <small
+            >※ 店舗辞書（保持/変換）は data/stores/&lt;tenant&gt;/kb/terms.json
+            を編集</small
+          >
+        </p>
+
+        <legend>権利・出典情報</legend>
+        <div class="row">
+          <label
+            >素材出典URL<input name="sourceUrl" placeholder="https://..."
+          /></label>
+          <label
+            >権利者（著作権者）<input
+              name="owner"
+              placeholder="ブランド/撮影者名"
+          /></label>
+        </div>
+        <div class="row">
+          <label
+            >ライセンス
+            <select name="license">
+              <option value="">（未指定）</option>
+              <option value="commercial-ok">商用OK</option>
+              <option value="editorial">エディトリアル専用</option>
+              <option value="restricted">制限付き</option>
+              <option value="unknown">不明</option>
+            </select>
+          </label>
+          <label
+            >期限（任意）<input name="expiresAt" placeholder="2026-12-31"
+          /></label>
+        </div>
+        <label
+          >許可市場（カンマ区切り）<input
+            name="allowedMarkets"
+            placeholder="r10,yss"
+        /></label>
+        <label
+          >備考（注記に反映）<input
+            name="assetNote"
+            placeholder="クレジット表記必須 など"
+        /></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>プロファイル</legend>
+        <label
+          >JSONパス（空なら sample.json）<input
+            name="profile"
+            placeholder="./data/profiles/sample.json"
+        /></label>
+      </fieldset>
+
+      <button type="submit">生成</button>
+    </form>
+
+    <div id="preview"></div>
+
+    <script>
+      document.getElementById("f").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        if (!fd.get("profile"))
+          fd.set("profile", "./data/profiles/sample.json");
+        const res = await fetch("/api/generate", { method: "POST", body: fd });
+        const j = await res.json();
+        const pv = document.getElementById("preview");
+        if (!j.ok) {
+          pv.innerHTML = "<p>生成に失敗: " + j.error + "</p>";
+          return;
+        }
+        pv.innerHTML = `<h3>プレビュー</h3><p><a href="${
+          j.path
+        }" target="_blank">ファイルを開く</a></p><img src="${
+          j.path
+        }?t=${Date.now()}"/>`;
+      });
+    </script>
+  </body>
+</html>

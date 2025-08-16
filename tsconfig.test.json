@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["jest", "node", "@types/supertest"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "target": "ES2017"
+  },
+  "include": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx", 
+    "test/**/*.test.ts",
+    "test/**/*.test.tsx",
+    "jest.setup.js"
+  ],
+  "exclude": ["node_modules", ".next"]
+}

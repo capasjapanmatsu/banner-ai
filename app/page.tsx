@@ -11,6 +11,7 @@ import EffectsPanel from "@/components/EffectsPanel";
 import LogoLibrary from "@/components/LogoLibrary";
 import { uid } from "@/lib/id";
 import { supabase } from "@/lib/supabase/client";
+import { analytics as commonAnalytics } from "@/src/analytics/track";
 import type { BackgroundEffect } from "@/types/banner";
 
 export default function Home() {
@@ -96,6 +97,16 @@ export default function Home() {
     setSelectedPreset(preset);
     const key = preset.platform;
     const size = preset.size;
+    
+    // プリセット選択をトラッキング
+    commonAnalytics.trackAssetAdopted(
+      'demo-user', 
+      preset.name, 
+      'preset',
+      undefined,
+      undefined,
+      ['user_selection']
+    );
     
     setSpec(prev => ({
       ...prev,
@@ -391,6 +402,12 @@ export default function Home() {
                     <span className="text-sm text-gray-600">
                       {user.email}
                     </span>
+                    <a
+                      href="/settings/profile"
+                      className="px-3 py-1 text-blue-600 border border-blue-300 rounded text-sm hover:bg-blue-50"
+                    >
+                      設定
+                    </a>
                     <button
                       onClick={handleLogout}
                       className="px-3 py-1 border border-gray-300 text-gray-700 rounded text-sm hover:bg-gray-50"
